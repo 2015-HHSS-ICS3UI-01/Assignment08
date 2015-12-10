@@ -36,15 +36,66 @@ public class ClownFace extends JComponent{
         g.clearRect(0, 0, WIDTH, HEIGHT);
         
         // GAME DRAWING GOES HERE 
+        
+        // head outline
         g.setColor(Color.YELLOW);
         g.fillRect(150, 20, 500, 450);
         
+        // shirt
         g.setColor(Color.WHITE);
         g.fillRect(150, 470, 500, 70);
         
+        // pants
         Color brown = new Color(207,136,80);
         g.setColor(brown);
         g.fillRect(150, 540, 500, 70);
+        
+        // left arm
+        g.setColor(Color.WHITE);
+        g.fillRoundRect(650, 450, 50, 80, 30, 30);
+        g.setColor(Color.YELLOW);
+        g.fillRect(650, 525, 50, 100);
+        
+        // right arm
+        g.setColor(Color.WHITE);
+        g.fillRoundRect(100, 450, 50, 80, 30, 30);
+        g.setColor(Color.YELLOW);
+        g.fillRect(100, 525, 50, 100);
+        
+        // outline of eyes
+        g.setColor(Color.WHITE);
+        g.fillOval(200, 120, 200, 180);
+        g.fillOval(400, 120, 200, 180);
+        
+        // 2nd outline of eyes
+        g.setColor(Color.BLACK);
+        g.fillOval(300, 175, 80, 80);
+        
+        g.setColor(Color.BLACK);
+        g.fillOval(425, 175, 80, 80);
+        
+        // 3rd outline of eyes
+        Color lightBlue = new Color(10,186,209);
+        g.setColor(lightBlue);
+        g.fillOval(435, 184, 60, 60);
+        
+        g.setColor(lightBlue);
+        g.fillOval(310, 184, 60, 60);
+        
+        // 4th outline of eyes
+        g.setColor(Color.BLACK);
+        g.fillOval(325, 200, 30, 30);
+        
+        g.setColor(Color.BLACK);
+        g.fillOval(450, 200, 30, 30);
+        
+        // smile
+        g.drawArc(200, 200, 400, 200, 180, 180);
+        
+        // teeth
+        g.setColor(Color.WHITE);
+        g.fillRect(340, 400, 40, 40);
+        g.fillRect(410, 400, 40, 40);
         // GAME DRAWING ENDS HERE
     }
     
