@@ -9,6 +9,11 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import javax.imageio.*;
+
 /**
  *
  * @author richj0985
@@ -16,7 +21,7 @@ import javax.swing.JFrame;
 public class ClownFace extends JComponent{
 
     // Height and Width of our game
-    static final int WIDTH = 800;
+    static final int WIDTH = 1024;
     static final int HEIGHT = 600;
     
     // sets the framerate and delay for our game
@@ -32,9 +37,16 @@ public class ClownFace extends JComponent{
     @Override
     public void paintComponent(Graphics g)
     {
-        // always clear the screen first!
-        g.clearRect(0, 0, WIDTH, HEIGHT);
+        BufferedImage img = null;
+
+        //  Load the background picture
+        try {
+            img = ImageIO.read( new File("SpongeBackground.jpg") );
+        } catch (IOException e) {
+        }
         
+        g.drawImage(img, 0, 0, null);
+
         // GAME DRAWING GOES HERE 
         
         // head outline
@@ -70,32 +82,63 @@ public class ClownFace extends JComponent{
         // 2nd outline of eyes
         g.setColor(Color.BLACK);
         g.fillOval(300, 175, 80, 80);
-        
-        g.setColor(Color.BLACK);
         g.fillOval(425, 175, 80, 80);
         
         // 3rd outline of eyes
         Color lightBlue = new Color(10,186,209);
         g.setColor(lightBlue);
         g.fillOval(435, 184, 60, 60);
-        
-        g.setColor(lightBlue);
         g.fillOval(310, 184, 60, 60);
         
         // 4th outline of eyes
         g.setColor(Color.BLACK);
         g.fillOval(325, 200, 30, 30);
-        
-        g.setColor(Color.BLACK);
         g.fillOval(450, 200, 30, 30);
         
-        // smile
-        g.drawArc(200, 200, 400, 200, 180, 180);
+        g.setColor(Color.BLACK);
+        g.fillRect(290, 80, 20, 40);
+        g.fillRect(225, 100, 20, 40);
+        g.fillRect(355, 100, 20, 40);
+        
+        g.fillRect(490, 80, 20, 40);
+        g.fillRect(425, 100, 20, 40);
+        g.fillRect(555, 100, 20, 40);
+        
+        // mouth
+        Color darkRed = new Color(145, 36, 3);
+        g.setColor(darkRed);
+        g.fillArc(200, 250, 400, 200, 180, 180);
         
         // teeth
         g.setColor(Color.WHITE);
-        g.fillRect(340, 400, 40, 40);
-        g.fillRect(410, 400, 40, 40);
+        g.fillRect(345, 350, 45, 45);
+        g.fillRect(415, 350, 45, 45);
+        
+        // tongue
+        Color lightPink = new Color(255, 167, 140);
+        g.setColor(lightPink);
+        g.fillRoundRect(360, 400, 80, 50, 30, 30);
+        
+        // dimples 
+        g.setColor(Color.BLACK);
+        g.drawArc(180, 325, 45, 45, 20, 200);
+        g.drawArc(570, 325, 45, 45, 340, 160);
+        
+        // nose
+        g.drawArc(380, 285, 40, 80, 0, 180);
+        
+        // part of pants
+        g.setColor(Color.BLACK);
+        g.fillRect(170, 555, 90, 30);
+        g.fillRect(290, 555, 90, 30);
+        g.fillRect(415, 555, 90, 30);
+        g.fillRect(535, 555, 90, 30);
+        
+        g.setColor(Color.RED);
+        g.fillArc(375, 445, 50, 50, 180, 180);
+        int[] kiteX = {375+25+0, 375+25+40/2, 375+25+0, 375+25-40/2};
+        int[] kiteY = {445+50+0-10, 445+50+40/2, 445+50+40+10, 445+50+40/2};
+        g.fillPolygon(kiteX, kiteY, 4);
         // GAME DRAWING ENDS HERE
     }
     
