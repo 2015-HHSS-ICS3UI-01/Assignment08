@@ -51,16 +51,23 @@ public class ClownFace extends JComponent{
         
         // head outline
         g.setColor(Color.YELLOW);
-        g.fillRect(150, 20, 500, 450);
+        g.fillRect(150, 20, 500, 500);
         
         // shirt
         g.setColor(Color.WHITE);
-        g.fillRect(150, 470, 500, 70);
+        g.fillRect(150, 490, 500, 50);
         
         // pants
         Color brown = new Color(207,136,80);
         g.setColor(brown);
         g.fillRect(150, 540, 500, 70);
+        
+        // part of pants
+        g.setColor(Color.BLACK);
+        g.fillRect(170, 555, 90, 30);
+        g.fillRect(290, 555, 90, 30);
+        g.fillRect(415, 555, 90, 30);
+        g.fillRect(535, 555, 90, 30);
         
         // left arm
         g.setColor(Color.WHITE);
@@ -73,6 +80,40 @@ public class ClownFace extends JComponent{
         g.fillRoundRect(100, 450, 50, 80, 30, 30);
         g.setColor(Color.YELLOW);
         g.fillRect(100, 525, 50, 100);
+        
+        // tie
+        g.setColor(Color.RED);
+        g.fillArc(375, 445 + 20, 50, 50, 180, 180);
+        int[] kiteX = {375+25+0, 375+25+40/2, 375+25+0, 375+25-40/2};
+        int[] kiteY = {445+50+0-10+20, 445+50+40/2+20, 445+50+40+10+20, 445+50+40/2+20};
+        g.fillPolygon(kiteX, kiteY, 4);
+        
+        // sponge
+        
+        // left
+        g.setColor(Color.YELLOW);
+        g.fillOval(140, 0, 50, 50);
+        g.fillOval(140, 50, 50, 50);
+        g.fillOval(140, 100, 50, 50);
+        g.fillOval(140, 150, 50, 50);
+        g.fillOval(140, 200, 50, 50);
+        g.fillOval(140, 250, 50, 50);
+        g.fillOval(140, 300, 50, 50);
+        g.fillOval(140, 350, 50, 50);
+        g.fillOval(140, 400, 50, 50);
+        g.fillOval(140, 450, 50, 50);
+        
+        // bottom
+        g.fillOval(190, 450, 50, 50);
+        g.fillOval(240, 450, 50, 50);
+        g.fillOval(290, 450, 50, 50);
+        g.fillOval(340, 450, 50, 50);
+        g.fillOval(390, 450, 50, 50);
+        g.fillOval(440, 450, 50, 50);
+        g.fillOval(490, 450, 50, 50);
+        g.fillOval(540, 450, 50, 50);
+        g.fillOval(590, 450, 50, 50);
+        g.fillOval(640, 450, 50, 50);
         
         // outline of eyes
         g.setColor(Color.WHITE);
@@ -127,18 +168,6 @@ public class ClownFace extends JComponent{
         // nose
         g.drawArc(380, 285, 40, 80, 0, 180);
         
-        // part of pants
-        g.setColor(Color.BLACK);
-        g.fillRect(170, 555, 90, 30);
-        g.fillRect(290, 555, 90, 30);
-        g.fillRect(415, 555, 90, 30);
-        g.fillRect(535, 555, 90, 30);
-        
-        g.setColor(Color.RED);
-        g.fillArc(375, 445, 50, 50, 180, 180);
-        int[] kiteX = {375+25+0, 375+25+40/2, 375+25+0, 375+25-40/2};
-        int[] kiteY = {445+50+0-10, 445+50+40/2, 445+50+40+10, 445+50+40/2};
-        g.fillPolygon(kiteX, kiteY, 4);
         // GAME DRAWING ENDS HERE
     }
     
