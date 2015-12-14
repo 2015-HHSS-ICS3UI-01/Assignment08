@@ -29,6 +29,10 @@ public class ClownFace extends JComponent{
     int lidsHeight = 0;
     boolean lidsIncrease = true;
     int eyelashHeight = 40;
+    int eyesPosition1 = 0;
+    boolean eyesIncrease1 = false;
+    boolean eyesIncrease2 = true;
+    int eyesPosition2 = 0;
     
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
@@ -86,6 +90,15 @@ public class ClownFace extends JComponent{
         int[] kiteX = {400, 420, 400, 380};
         int[] kiteY = {505, 535, 575, 535};
         g.fillPolygon(kiteX, kiteY, 4);
+        
+        // detail on shirt
+        g.setColor(Color.BLACK);
+        int[] triangleX = {280, 370, 325};
+        int[] triangleY = {475, 475, 525};
+        g.drawPolygon(triangleX, triangleY, 3);
+        int[] triangleX2 = {430, 520, 475};
+        int[] triangleY2 = {475, 475, 525};
+        g.drawPolygon(triangleX2, triangleY2, 3);
         
         // left arm
         g.setColor(Color.WHITE);
@@ -179,17 +192,17 @@ public class ClownFace extends JComponent{
         g.fillOval(400, 120, 200, 180);
         // 2nd outline of eyes
         g.setColor(Color.BLACK);
-        g.fillOval(300, 175, 80, 80);
-        g.fillOval(425, 175, 80, 80);
+        g.fillOval(300 + eyesPosition1, 175, 80, 80);
+        g.fillOval(425 + eyesPosition2, 175, 80, 80);
         // 3rd outline of eyes
         Color lightBlue = new Color(10,186,209);
         g.setColor(lightBlue);
-        g.fillOval(435, 184, 60, 60);
-        g.fillOval(310, 184, 60, 60);
+        g.fillOval(435 + eyesPosition2, 184, 60, 60);
+        g.fillOval(310 + eyesPosition1, 184, 60, 60);
         // 4th outline of eyes
         g.setColor(Color.BLACK);
-        g.fillOval(325, 200, 30, 30);
-        g.fillOval(450, 200, 30, 30);
+        g.fillOval(325 + eyesPosition1, 200, 30, 30);
+        g.fillOval(450 + eyesPosition2, 200, 30, 30);
         
         // mouth
         g.setColor(darkRed);
@@ -234,10 +247,10 @@ public class ClownFace extends JComponent{
         // game will end if you set done = false;
         boolean done = false; 
         
-        try {
+        try{
             Thread.sleep(1000);
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
+        } catch(Exception e){
+            e.printStackTrace();
         }
         
         while(!done)
@@ -277,15 +290,41 @@ public class ClownFace extends JComponent{
                 } else{
                     lidsIncrease = true;
                     eyelashHeight = 40;
-                    try {
+                    try{
                         Thread.sleep(1000);
-                    } catch(InterruptedException ex) {
-                        Thread.currentThread().interrupt();
+                    } catch(Exception e){
+                        e.printStackTrace();
                     }
                 }
             }
             
-
+            if(eyesIncrease1){
+                if(eyesPosition1 < 10){
+                    eyesPosition1++;
+                }else{
+                    eyesIncrease1 = false;
+                }
+            }else{
+                if(eyesPosition1 > -90){
+                    eyesPosition1--;
+                } else{
+                    eyesIncrease1 = true;
+                }
+            }
+            
+            if(eyesIncrease2){
+                if(eyesPosition2 < 90){
+                    eyesPosition2++;
+                }else{
+                    eyesIncrease2 = false;
+                }
+            }else{
+                if(eyesPosition2 > -10){
+                    eyesPosition2--;
+                } else{
+                    eyesIncrease2 = true;
+                }
+            }
             // GAME LOGIC ENDS HERE 
             
             // update the drawing (calls paintComponent)
