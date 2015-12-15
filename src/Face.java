@@ -28,11 +28,16 @@ public class Face extends JComponent {
     Color nose = new Color(207, 178, 145);
     Color mouth = new Color(245, 105, 105);
     Color hat = new Color(71, 63, 212);
+    Color cheek = new Color(240,188,168);
+    Color buttons = new Color(73,87,117);
     //arrays for the eyelids
     int[] xpoints = {205, 205, 278, 278};
     int[] ypoints = {260, 260, 250, 200};
     int[] xpointstwo = {325, 325, 398, 398};
     int[] ypointstwo = {250, 200, 260, 260};
+    
+    int change = 1;
+    long timer = 0;
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
@@ -43,15 +48,29 @@ public class Face extends JComponent {
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
         // GAME DRAWING GOES HERE 
+        //shirt
+        g.setColor(Color.darkGray);
+        g.fillOval(175,400,250,300);
+        g.setColor(Color.white);
+        g.fillRect(264,400,75,300);
+        g.setColor(buttons);
+        g.fillOval(240,460,15,15);
+        g.fillOval(240,500,15,15);
+        g.fillOval(240,540,15,15);
+        g.fillOval(240,580,15,15);
         //hair
         g.setColor(Color.black);
         g.fillOval(130, 245, 70, 70);
         g.fillOval(395, 245, 70, 70);
         g.fillOval(125, 270, 100, 100);
         g.fillOval(374, 270, 100, 100);
-        //skin
+        //skin/face
         g.setColor(skin);
         g.fillOval(150, 150, 300, 300);
+        //cheek
+        g.setColor(cheek);
+        g.fillOval(210,335,45,23);
+        g.fillOval(345,335,45,23);
         //nose
         g.setColor(nose);
         g.fillOval(280, 335, 45, 15);
@@ -97,12 +116,23 @@ public class Face extends JComponent {
 
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
-            if(ypoints[3]<300){
-                ypoints[3]++;
-                ypointstwo[1]++;
+           
+            if (ypoints[3] < 200) {
+                change=1;
+            }
+
+            if(ypoints[3]>300 && timer == 0){
+                change=-1;
+                timer = 3*60;
+            }
+            if(timer>0){
+                timer--;
             }
             
-            
+            if(timer == 0){
+                ypoints[3]+= change;
+                ypointstwo[1]+=change;
+            }
             // GAME LOGIC ENDS HERE 
 
             // update the drawing (calls paintComponent)
