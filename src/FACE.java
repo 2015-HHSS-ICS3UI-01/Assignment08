@@ -21,9 +21,19 @@ public class FACE extends JComponent{
     // you just need to select an approproate framerate
     long desiredFPS = 60;
     long desiredTime = (1000)/desiredFPS;
-    
 
+    //eye brow moving
+    int Y = 260;
+    int browchange = -1;
     
+    //ears moving
+    int X1 = 455;
+    int X2 = 250;
+    int rightEar = -1;
+    int leftEar = -1;
+            
+            
+            
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
@@ -63,10 +73,28 @@ public class FACE extends JComponent{
         
         //ears
         g.setColor(skin);
-        g.fillOval(455, 275, 65, 100);
-        g.fillOval(250, 275, 65, 100);
+        g.fillOval(X1, 275, 65, 100);
+        g.fillOval(X2, 275, 65, 100);
         
         //nose
+        int[] xpoints = {390, 390, 360};
+        int[] ypoints = {310, 350, 350};
+        Color nose  = new Color(196, 122, 73);
+        g.setColor(nose);
+        g.fillPolygon(xpoints, ypoints, 3);
+        
+        //EYE BROW
+        g.setColor(Color.BLACK);
+        g.fillRect(300, Y, 175, 8);
+        
+        //hair
+        g.drawArc(310, 153, 100, 100, 360, 50);
+        g.drawArc(300, 150, 100, 100, 360, 50);
+        g.drawArc(290, 150, 100, 100, 360, 50);
+        g.drawArc(280, 150, 100, 100, 360, 50);
+        g.drawArc(270, 152, 100, 100, 360, 50);
+        
+
         
         
         
@@ -94,8 +122,25 @@ public class FACE extends JComponent{
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
             
+            //brow moving
+            if(Y < 220){
+                browchange = +1;
+            }
+            if(Y > 260){
+                browchange = -1;
+            }           
+            Y = Y + browchange;
             
-
+            // right ear moving
+            if(X1 < 470){
+                rightEar = +1;
+            }
+            if(X1 > 455){
+                rightEar = -1;
+            }
+            X1 = X1 + rightEar;
+            
+            
             // GAME LOGIC ENDS HERE 
             
             // update the drawing (calls paintComponent)
