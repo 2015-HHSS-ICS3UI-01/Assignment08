@@ -50,8 +50,23 @@ public class FACE extends JComponent{
         g.fillOval(333, 288, 15, 15);
         g.fillOval(423, 288, 15, 15);
         
+        //mouth
+        g.setColor(Color.BLACK);
+        g.fillArc(350, 335, 75, 75, 180, 180);
         
+        //teeth
+        g.setColor(Color.WHITE);
+        g.fillRect(375, 373, 25, 18);
+        g.setColor(Color.BLACK);
+        g.drawRect(375, 373, 25, 18);
+        g.drawLine(387, 373, 387, 391);
         
+        //ears
+        g.setColor(skin);
+        g.fillOval(455, 275, 65, 100);
+        g.fillOval(250, 275, 65, 100);
+        
+        //nose
         
         
         
