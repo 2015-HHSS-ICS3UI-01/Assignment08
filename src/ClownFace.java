@@ -34,6 +34,11 @@ public class ClownFace extends JComponent{
     boolean eyesIncrease2 = true;
     int eyesPosition2 = 0;
     
+    int teethPosition1 = 0;
+    boolean teethIncrease1 = false;
+    boolean teethIncrease2 = true;
+    int teethPosition2 = 0;
+    
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
     long desiredFPS = 60;
@@ -210,8 +215,8 @@ public class ClownFace extends JComponent{
         
         // teeth
         g.setColor(Color.WHITE);
-        g.fillRect(345, 350, 45, 45);
-        g.fillRect(415, 350, 45, 45);
+        g.fillRect(345 + teethPosition1, 350, 45, 45);
+        g.fillRect(415 + teethPosition2, 350, 45, 45);
         
         // tongue
         g.setColor(lightPink);
@@ -262,7 +267,7 @@ public class ClownFace extends JComponent{
             // GAME LOGIC STARTS HERE
 
             if(tongueIncrease){
-                if(tongueHeight < 180){
+                if(tongueHeight < 120){
                     tongueHeight++;
                 }else{
                     tongueIncrease = false;
@@ -325,6 +330,35 @@ public class ClownFace extends JComponent{
                     eyesIncrease2 = true;
                 }
             }
+            
+            if(teethIncrease1){
+                if(teethPosition1 < 2){
+                    teethPosition1++;
+                }else{
+                    teethIncrease1 = false;
+                }
+            }else{
+                if(teethPosition1 > -18){
+                    teethPosition1--;
+                } else{
+                    teethIncrease1 = true;
+                }
+            }
+            
+            if(teethIncrease2){
+                if(teethPosition2 < 18){
+                    teethPosition2++;
+                }else{
+                    teethIncrease2 = false;
+                }
+            }else{
+                if(teethPosition2 > -2){
+                    teethPosition2--;
+                } else{
+                    teethIncrease2 = true;
+                }
+            }
+            
             // GAME LOGIC ENDS HERE 
             
             // update the drawing (calls paintComponent)
