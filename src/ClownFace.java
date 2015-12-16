@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * create a spongebob squarepants program
  */
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -24,27 +22,38 @@ public class ClownFace extends JComponent{
     static final int WIDTH = 1024;
     static final int HEIGHT = 600;
     
+    // create variable to store the hieght of the tongue
     int tongueHeight = 50;
+    // create variable to determine if the tongue height is increasing or decreasing
     boolean tongueIncrease = true;
+    // create a variable to store the height of the eyelids
     int lidsHeight = 0;
+    // create a variable to store if the eyelids height is increasing or decreasing
     boolean lidsIncrease = true;
+    // create varaible to store the height of the eyelashes
     int eyelashHeight = 40;
-    int eyesPosition1 = 0;
-    boolean eyesIncrease1 = false;
-    boolean eyesIncrease2 = true;
-    int eyesPosition2 = 0;
-    
-    int teethPosition1 = 0;
+    // create a variable to store the x and y position offset of the both eyes
+    int eyesXPosition = 0;
+    int eyesYPosition = 0;
+    // create a variable to store the current X and Y eyePositionMovement direction and speed
+    int eyeXPositionMovement = 0;
+    int eyeYPositionMovement = 0;
+    // create a variable to store the next blink time in milliseconds
+    long nextBlinkTime = 0;           
+    // create a variable to store the x position of the teeth
+    int teethPosition1 = 345;
+    // create a variable to determine if the x position of the first tooth is increasing or decreasing
     boolean teethIncrease1 = false;
+    // create a variable to determine if the x position of the second tooth is increasing or decreasing
     boolean teethIncrease2 = true;
-    int teethPosition2 = 0;
-    
+    // create a variable to store the x position of the second tooth
+    int teethPosition2 = 415;
+ 
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
-    long desiredFPS = 60;
+    long desiredFPS = 100;
     long desiredTime = (1000)/desiredFPS;
-    
-
+   
     
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
@@ -54,7 +63,7 @@ public class ClownFace extends JComponent{
     {
         BufferedImage img = null;
 
-        //  Load the background picture
+        //  Load the background picture that Spongebob will be drawn on top of
         try {
             img = ImageIO.read( new File("SpongeBackground.jpg") );
         } catch (IOException e) {
@@ -197,17 +206,17 @@ public class ClownFace extends JComponent{
         g.fillOval(400, 120, 200, 180);
         // 2nd outline of eyes
         g.setColor(Color.BLACK);
-        g.fillOval(300 + eyesPosition1, 175, 80, 80);
-        g.fillOval(425 + eyesPosition2, 175, 80, 80);
+        g.fillOval(300 - 35 + eyesXPosition , 175 + eyesYPosition, 80, 80);
+        g.fillOval(425 + 35 + eyesXPosition , 175 + eyesYPosition, 80, 80);
         // 3rd outline of eyes
         Color lightBlue = new Color(10,186,209);
         g.setColor(lightBlue);
-        g.fillOval(435 + eyesPosition2, 184, 60, 60);
-        g.fillOval(310 + eyesPosition1, 184, 60, 60);
+        g.fillOval(435 + 35 + eyesXPosition , 184 + eyesYPosition, 60, 60);
+        g.fillOval(310 - 35 + eyesXPosition , 184 + eyesYPosition, 60, 60);
         // 4th outline of eyes
         g.setColor(Color.BLACK);
-        g.fillOval(325 + eyesPosition1, 200, 30, 30);
-        g.fillOval(450 + eyesPosition2, 200, 30, 30);
+        g.fillOval(325 - 35 + eyesXPosition , 200 + eyesYPosition, 30, 30);
+        g.fillOval(450 + 35 + eyesXPosition , 200 + eyesYPosition, 30, 30);
         
         // mouth
         g.setColor(darkRed);
@@ -215,8 +224,8 @@ public class ClownFace extends JComponent{
         
         // teeth
         g.setColor(Color.WHITE);
-        g.fillRect(345 + teethPosition1, 350, 45, 45);
-        g.fillRect(415 + teethPosition2, 350, 45, 45);
+        g.fillRect(teethPosition1, 350, 45, 45);
+        g.fillRect(teethPosition2, 350, 45, 45);
         
         // tongue
         g.setColor(lightPink);
@@ -252,6 +261,7 @@ public class ClownFace extends JComponent{
         // game will end if you set done = false;
         boolean done = false; 
         
+        // delay game
         try{
             Thread.sleep(1000);
         } catch(Exception e){
@@ -265,7 +275,9 @@ public class ClownFace extends JComponent{
             
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE
-
+            
+            // move the tongue in or out of the mouth with each loop
+            // of the game until it's fully in or fully out
             if(tongueIncrease){
                 if(tongueHeight < 120){
                     tongueHeight++;
@@ -280,65 +292,73 @@ public class ClownFace extends JComponent{
                 }
             }
             
-            if(lidsIncrease){
-                if(lidsHeight < 180){
-                    lidsHeight++;
-                    eyelashHeight = 0;
+            // Move the eyelids up and down over top of the eyes to simulate
+            // blinking of the eyelids.   Delay movement of the eyelid
+            // to simulate the blink of a real person.    
+            // To simulate the eyelid open and closing, increate and decrease the 
+            // each time it's drawn
+            if ( nextBlinkTime < System.currentTimeMillis() ) {
+                if(lidsIncrease){
+                    if(lidsHeight < 180){
+                        lidsHeight += 8;
+                        eyelashHeight = 0;
+                    } else{
+                       lidsIncrease = false;
+                       eyelashHeight = 0;
+                    }
                 } else{
-                   lidsIncrease = false;
-                    eyelashHeight = 0;
-                }
-            } else{
-                if(lidsHeight > 0){
-                    lidsHeight--;
-                    eyelashHeight = 0;
-                } else{
-                    lidsIncrease = true;
-                    eyelashHeight = 40;
-                    try{
-                        Thread.sleep(1000);
-                    } catch(Exception e){
-                        e.printStackTrace();
+                    if(lidsHeight > 0){
+                        lidsHeight -= 8;
+                        eyelashHeight = 0;
+                    } else{
+                        lidsIncrease = true;
+                        eyelashHeight = 40;
+                        
+                        // determine the next blink time in milliseconds from now
+                        // the eyes should blink from 3-5 seconds from now
+                        nextBlinkTime = System.currentTimeMillis() + 2000 + (long) (Math.random() * 3000.0);
+                        
                     }
                 }
-            }
-            
-            if(eyesIncrease1){
-                if(eyesPosition1 < 10){
-                    eyesPosition1++;
-                }else{
-                    eyesIncrease1 = false;
+            } 
+               
+            // Move the position of the eye to simulate a living spongebob 
+            // Randomize the movement of the eyes to make is slightly more realistic
+            if ( (int) (Math.random() * 20.0) == 1 ) {
+                // determine the eye direction for X and Y but only compute a new direction 
+                // every so often randomly to make it more realistic
+                if ( Math.random() >= 0.5 ) {
+                    eyeXPositionMovement = -1;
+                } else {
+                    eyeXPositionMovement = +1;
                 }
-            }else{
-                if(eyesPosition1 > -90){
-                    eyesPosition1--;
-                } else{
-                    eyesIncrease1 = true;
-                }
-            }
-            
-            if(eyesIncrease2){
-                if(eyesPosition2 < 90){
-                    eyesPosition2++;
-                }else{
-                    eyesIncrease2 = false;
-                }
-            }else{
-                if(eyesPosition2 > -10){
-                    eyesPosition2--;
-                } else{
-                    eyesIncrease2 = true;
+                if ( Math.random() >= 0.5 ) {
+                    eyeYPositionMovement = -1;
+                } else {
+                    eyeYPositionMovement = +1;
                 }
             }
-            
+
+            // Move eye1 provide it doesn't move he pupil outside of the eye
+            if ( (eyesXPosition + eyeXPositionMovement ) > -45 && 
+                 (eyesXPosition + eyeXPositionMovement ) < 45 ) {
+                eyesXPosition += eyeXPositionMovement;
+            }
+            // Move eye2 provide it doesn't move he pupil outside of the eye
+            if ( (eyesYPosition + eyeYPositionMovement ) > -25 && 
+                 (eyesYPosition + eyeYPositionMovement ) < 25 ) {
+                eyesYPosition += eyeYPositionMovement;
+            }
+ 
+            // Move the teeth in the mouth to make the character more interesting
             if(teethIncrease1){
-                if(teethPosition1 < 2){
+                if(teethPosition1 < 347){
                     teethPosition1++;
                 }else{
                     teethIncrease1 = false;
                 }
             }else{
-                if(teethPosition1 > -18){
+                if(teethPosition1 > 327){
                     teethPosition1--;
                 } else{
                     teethIncrease1 = true;
@@ -346,13 +366,13 @@ public class ClownFace extends JComponent{
             }
             
             if(teethIncrease2){
-                if(teethPosition2 < 18){
+                if(teethPosition2 < 433){
                     teethPosition2++;
                 }else{
                     teethIncrease2 = false;
                 }
             }else{
-                if(teethPosition2 > -2){
+                if(teethPosition2 > 413){
                     teethPosition2--;
                 } else{
                     teethIncrease2 = true;
@@ -361,11 +381,10 @@ public class ClownFace extends JComponent{
             
             // GAME LOGIC ENDS HERE 
             
-            // update the drawing (calls paintComponent)
+            // update the drawing of the character (calls paintComponent)
             repaint();
             
-            
-            
+                        
             // SLOWS DOWN THE GAME BASED ON THE FRAMERATE ABOVE
             // USING SOME SIMPLE MATH
             deltaTime = System.currentTimeMillis() - startTime;
