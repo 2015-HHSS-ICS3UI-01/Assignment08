@@ -89,7 +89,10 @@ public class Face extends JComponent{
         
         //draw nose 
          g.setColor(Color.red);
-        g.fillOval(285,300 ,150 ,150 );   
+        g.fillOval(275,280 ,150 ,150 );   
+        
+        //make smile 
+        g.fillArc(215,300, 270, 270, 177, 190);
         
         
         // GAME DRAWING ENDS HERE
