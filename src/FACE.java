@@ -30,7 +30,7 @@ public class FACE extends JComponent {
     int X2 = 250;
     int rightEar = -1;
     int leftEar = -1;
-
+    
     Font wordFont = new Font("Times New Roman", Font.PLAIN, 45);
 
 // drawing of the game happens in here
@@ -42,7 +42,7 @@ public class FACE extends JComponent {
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
         // GAME DRAWING GOES HERE 
-        //face
+        //face with new skin color
         Color skin = new Color(217, 165, 93);
         g.setColor(skin);
         g.fillOval(275, 200, 225, 250);
@@ -52,7 +52,7 @@ public class FACE extends JComponent {
         g.fillOval(320, 277, 42, 35);
         g.fillOval(410, 277, 42, 35);
 
-        //pupils
+        //pupils with new blue color
         Color pupils = new Color(50, 185, 230);
         g.setColor(pupils);
         g.fillOval(333, 288, 15, 15);
@@ -81,7 +81,7 @@ public class FACE extends JComponent {
         g.setColor(nose);
         g.fillPolygon(xpoints, ypoints, 3);
 
-        //EYE BROW
+        //UNI-BROW
         g.setColor(Color.BLACK);
         g.fillRect(300, Y, 175, 8);
 
@@ -92,6 +92,7 @@ public class FACE extends JComponent {
         g.drawArc(280, 150, 100, 100, 360, 50);
         g.drawArc(270, 152, 100, 100, 360, 50);
 
+        //show word on the screen
         g.setFont(wordFont);
         if (true) {
             g.drawString("I GOT IT FROM MY DADDY!", 4 * 20, 33 * 16);
@@ -118,7 +119,8 @@ public class FACE extends JComponent {
 
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
-            //brow moving
+            
+            //Uni-brow moving up and down
             if (Y < 250) {
                 browchange = +1;
             }
@@ -127,7 +129,7 @@ public class FACE extends JComponent {
             }
             Y = Y + browchange;
 
-            // right ear moving
+            //right ear moving
             if (X1 < 455) {
                 rightEar = +1;
             }
@@ -144,8 +146,8 @@ public class FACE extends JComponent {
                 leftEar = +1;
             }
             X2 = X2 + leftEar;
-
-            // GAME LOGIC ENDS HERE 
+             
+             // GAME LOGIC ENDS HERE 
             // update the drawing (calls paintComponent)
             repaint();
 
