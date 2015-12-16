@@ -279,14 +279,18 @@ public class ClownFace extends JComponent{
             // move the tongue in or out of the mouth with each loop
             // of the game until it's fully in or fully out
             if(tongueIncrease){
+                // set the max length that it increases to
                 if(tongueHeight < 120){
                     tongueHeight++;
+                // since it is at the max length then it should now decrease
                 }else{
                     tongueIncrease = false;
                 }
             } else{
+                // set the min length
                 if(tongueHeight > 50){
                     tongueHeight--;
+                // since it is at the min length then it shoule now increase
                 } else{
                     tongueIncrease = true;
                 }
@@ -299,17 +303,21 @@ public class ClownFace extends JComponent{
             // each time it's drawn
             if ( nextBlinkTime < System.currentTimeMillis() ) {
                 if(lidsIncrease){
+                    // set the max height
                     if(lidsHeight < 180){
                         lidsHeight += 8;
                         eyelashHeight = 0;
+                    // since it is at the max height then it should decrease in height
                     } else{
                        lidsIncrease = false;
                        eyelashHeight = 0;
                     }
                 } else{
+                    // set the min height
                     if(lidsHeight > 0){
                         lidsHeight -= 8;
                         eyelashHeight = 0;
+                    // since it is at the min height then it should increase in height
                     } else{
                         lidsIncrease = true;
                         eyelashHeight = 40;
@@ -327,11 +335,13 @@ public class ClownFace extends JComponent{
             if ( (int) (Math.random() * 20.0) == 1 ) {
                 // determine the eye direction for X and Y but only compute a new direction 
                 // every so often randomly to make it more realistic
+                // x position
                 if ( Math.random() >= 0.5 ) {
                     eyeXPositionMovement = -1;
                 } else {
                     eyeXPositionMovement = +1;
                 }
+                // y position
                 if ( Math.random() >= 0.5 ) {
                     eyeYPositionMovement = -1;
                 } else {
@@ -339,12 +349,14 @@ public class ClownFace extends JComponent{
                 }
             }
 
-            // Move eye1 provide it doesn't move he pupil outside of the eye
+            // Move eyeX provide it doesn't move his pupil outside of the eye
+            // x position
             if ( (eyesXPosition + eyeXPositionMovement ) > -45 && 
                  (eyesXPosition + eyeXPositionMovement ) < 45 ) {
                 eyesXPosition += eyeXPositionMovement;
             }
-            // Move eye2 provide it doesn't move he pupil outside of the eye
+            // Move eyeY provide it doesn't move his pupil outside of the eye
+            // y positition
             if ( (eyesYPosition + eyeYPositionMovement ) > -25 && 
                  (eyesYPosition + eyeYPositionMovement ) < 25 ) {
                 eyesYPosition += eyeYPositionMovement;
@@ -352,19 +364,24 @@ public class ClownFace extends JComponent{
  
             // Move the teeth in the mouth to make the character more interesting
             if(teethIncrease1){
+                // set max teeth position
                 if(teethPosition1 < 347){
                     teethPosition1++;
+                // since it is at the max it should then decrease
                 }else{
                     teethIncrease1 = false;
                 }
             }else{
+                // set min teeth psoition
                 if(teethPosition1 > 327){
                     teethPosition1--;
+                // since it is at the min it should then increase
                 } else{
                     teethIncrease1 = true;
                 }
             }
             
+            // do the same for the other tooth
             if(teethIncrease2){
                 if(teethPosition2 < 433){
                     teethPosition2++;
@@ -393,6 +410,7 @@ public class ClownFace extends JComponent{
                 //took too much time, don't wait
             }else
             {
+                // delay game
                 try
                 {
                     Thread.sleep(desiredTime - deltaTime);
