@@ -196,7 +196,7 @@ public class ClownFace extends JComponent{
         g.fillRect(290, 80, 20, eyelashHeight);
         g.fillRect(235, 100, 20, eyelashHeight);
         g.fillRect(345, 100, 20, eyelashHeight);
-        // second set
+        // 2nd set
         g.fillRect(490, 80, 20, eyelashHeight);
         g.fillRect(435, 100, 20, eyelashHeight);
         g.fillRect(545, 100, 20, eyelashHeight);
