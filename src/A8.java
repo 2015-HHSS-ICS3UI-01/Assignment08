@@ -87,16 +87,16 @@ public class A8 extends JComponent {
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
 
-
+            // hat starts to move up
             y = y + move;
-
+            // where the hat stops and moves back down
             if (y == -100) {
                 move = 1;
                            
 
             }
-
-if (y > 25) {
+            // get the hat to bounce back up
+            if (y > 25) {
                     move = -1;
                 }
 
