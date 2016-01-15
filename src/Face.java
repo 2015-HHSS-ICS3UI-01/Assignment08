@@ -9,7 +9,7 @@ import javax.swing.JFrame;
  * @author alled7036
  */
   
-
+   
 public class Face extends JComponent{
 
     // Height and Width of our game
